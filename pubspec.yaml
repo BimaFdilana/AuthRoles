@@ -12,6 +12,7 @@ dependencies:
   firebase_core: ^2.14.0
   flutter:
     sdk: flutter
+  shared_preferences: ^2.1.2
 
 dev_dependencies:
   flutter_lints: ^2.0.0

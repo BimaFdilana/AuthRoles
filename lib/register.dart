@@ -29,11 +29,11 @@ class _RegisterState extends State<Register> {
   bool _isObscure2 = true;
   File? file;
   var options = [
-    'Student',
-    'Teacher',
+    'Admin',
+    'Pencari',
   ];
-  var _currentItemSelected = "Student";
-  var rool = "Student";
+  var _currentItemSelected = "Pencari";
+  var rool = "Pencari";
 
   @override
   Widget build(BuildContext context) {
@@ -288,14 +288,6 @@ class _RegisterState extends State<Register> {
                         ),
                         SizedBox(
                           height: 20,
-                        ),
-                        Text(
-                          "WEBFUN",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                            color: Colors.yellowAccent[400],
-                          ),
                         ),
                       ],
                     ),

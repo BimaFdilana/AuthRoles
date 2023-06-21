@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'student.dart';
-import 'Teacher.dart';
+import 'pencari_page.dart';
+import 'admin_page.dart';
 import 'register.dart';
-
-
 
 class LoginPage extends StatefulWidget {
   @override
@@ -136,7 +134,6 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           keyboardType: TextInputType.emailAddress,
                         ),
-                       
                         SizedBox(
                           height: 20,
                         ),
@@ -165,14 +162,16 @@ class _LoginPageState extends State<LoginPage> {
                           height: 10,
                         ),
                         Visibility(
-                            maintainSize: true,
-                            maintainAnimation: true,
-                            maintainState: true,
-                            visible: visible,
-                            child: Container(
-                                child: CircularProgressIndicator(
+                          maintainSize: true,
+                          maintainAnimation: true,
+                          maintainState: true,
+                          visible: visible,
+                          child: Container(
+                            child: CircularProgressIndicator(
                               color: Colors.white,
-                            ))),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -218,37 +217,6 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 15,
                     ),
-                    Text(
-                      "Made by",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 40,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "WEB",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                            color: Colors.blue[900],
-                          ),
-                        ),
-                        Text(
-                          "FUN",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                            color: Colors.yellowAccent[400],
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
@@ -263,25 +231,25 @@ class _LoginPageState extends State<LoginPage> {
     User? user = FirebaseAuth.instance.currentUser;
     // ignore: unused_local_variable
     var kk = FirebaseFirestore.instance
-            .collection('users')
-            .doc(user!.uid)
-            .get()
-            .then((DocumentSnapshot documentSnapshot) {
+        .collection('users')
+        .doc(user!.uid)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
-        if (documentSnapshot.get('rool') == "Teacher") {
-           Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>  Teacher(),
-          ),
-        );
-        }else{
+        if (documentSnapshot.get('rool') == "AdminPage") {
           Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>  Student(),
-          ),
-        );
+            context,
+            MaterialPageRoute(
+              builder: (context) => AdminPage(),
+            ),
+          );
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PencariPage(),
+            ),
+          );
         }
       } else {
         print('Document does not exist on the database');
@@ -309,5 +277,3 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 }
-
-
